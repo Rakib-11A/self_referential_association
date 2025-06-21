@@ -1,0 +1,14 @@
+class CreateRelationships < ActiveRecord::Migration[8.0]
+  def change
+    create_table :relationships do |t|
+      t.integer :follower_id
+      t.integer :follewed_id
+
+      t.timestamps
+    end
+
+    add_index :relationships, :follower_id
+    add_index :relationships, :follewed_id
+    add_index :relationships, [:follower_id, :follewed_id], unique: true
+  end
+end
